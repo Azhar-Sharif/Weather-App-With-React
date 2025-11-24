@@ -37,3 +37,16 @@ export function splitPastNext(hours, now) {
     next24: hours.filter((h) => h.fullDate >= now),
   };
 }
+
+export function formatHourData(hour) {
+  const date = new Date(hour.fullDate);
+  const hh = String(date.getHours()).padStart(2, "0");
+  const mm = String(date.getMinutes()).padStart(2, "0");
+  return {
+    time: `${hh}:${mm}`,
+    temp: hour.temp,
+    windspeed: hour.windspeed,
+    precipprob: hour.precipprob,
+    conditions: hour.conditions,
+  };
+}

@@ -1,4 +1,4 @@
-import { getUnixTimestamp, flattenHours, filterHours, splitPastNext } from "@/utils/helpers.js";
+import { getUnixTimestamp, flattenHours, filterHours, splitPastNext, formatHourData } from "@/utils/helpers.js";
 
 export async function fetchWeather(location) {
   const API_KEY = import.meta.env.VITE_VISUAL_CROSSING_API_KEY;
@@ -20,8 +20,8 @@ export async function fetchWeather(location) {
   const { past24: past24Hours, next24: next24Hours } = splitPastNext(filtered, now);
 
   return {
-    current: next24Hours[0] ?? past24Hours[past24Hours.length - 1],
-    past24: past24Hours,
-    next24: next24Hours,
+    current: formatHourData(next24Hours[0] ?? past24Hours[past24Hours.length - 1]),
+    past24: past24Hours.map(formatHourData),
+    next24: next24Hours.map(formatHourData),
   };
 }
