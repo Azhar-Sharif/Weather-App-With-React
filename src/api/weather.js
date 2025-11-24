@@ -18,7 +18,7 @@ export async function fetchWeather(location) {
   const allHours = flattenHours(data);
   const filtered = filterHours(allHours, past24, future24);
   const { past24: past24Hours, next24: next24Hours } = splitPastNext(filtered, now);
-
+  
   return {
     current: formatHourData(next24Hours[0] ?? past24Hours[past24Hours.length - 1]),
     past24: past24Hours.map(formatHourData),
